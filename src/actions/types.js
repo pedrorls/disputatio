@@ -1,1 +1,1 @@
-export const FECTH_POSTS = 'fetch_posts';
+export const { FETCH_POSTS } = 'fetch_posts';
