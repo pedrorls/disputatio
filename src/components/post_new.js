@@ -45,6 +45,24 @@ class PostNew extends Component{
     }
 }
 
+function validate(values) {
+    const errors = {};
+
+    if(!values.title){
+        errors.title = 'Enter a title!';
+    }
+
+    if(!values.categories){
+        errors.categories = 'Enter some categories!';
+    }
+
+    if(!values.content || values.content < 30){
+        errors.content= 'The post need some content with at least 30 characters';
+    }
+
+    return errors;
+}
+
 export default reduxForm({ 
     validate,
     form: 'PostNewForm'
