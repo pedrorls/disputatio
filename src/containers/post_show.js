@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {  connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import { fetchSinglePost, deletePost } from '../actions/index';
+import { fetchSinglePost, deletePost } from '../actions';
 
 class PostShow extends Component {
     componentDidMount(){

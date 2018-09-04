@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import { Link } from 'react-router-dom';
 
-import { createPost } from '../actions/index';
+import { createPost } from '../actions';
 
 class PostNew extends Component{
     renderField(field){
