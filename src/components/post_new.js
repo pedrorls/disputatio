@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
+import { Link } from 'react-router-dom';
+
+import { createPost } from '../actions/index';
 
 class PostNew extends Component{
     renderField(field){
@@ -23,13 +27,17 @@ class PostNew extends Component{
     }
 
     onSubmit(values) {
-
+        this.props.createPost(values, () => {
+            this.props.history.push('/');
+        });
     }
 
     render(){
         const { handleSubmit } = this.props;
 
         return(
+            <div>
+            <h3>New Post</h3>
             <form onSubmit={ handleSubmit(this.onSubmit.bind(this))}>
                 <Field
                     label="Title"
@@ -50,9 +58,13 @@ class PostNew extends Component{
                     component={ this.renderField }
                 />
                 <button type="submit" className="btn btn-primary-outline">
-                    Send  <i class="far fa-paper-plane"></i>
+                    Send  <i className="far fa-paper-plane"></i>
                 </button>
+                <Link to='/' className='btn btn-danger-outline'>
+                    Cancel  <i className="fas fa-ban"></i>
+                </Link>
             </form>
+            </div>
         );
     }
 }
@@ -68,7 +80,7 @@ function validate(values) {
         errors.categories = 'Enter some categories!';
     }
 
-    if(!values.content || values.content < 30){
+    if(!values.content){
         errors.content= 'The post need some content with at least 30 characters';
     }
 
@@ -78,4 +90,6 @@ function validate(values) {
 export default reduxForm({ 
     validate,
     form: 'PostNewForm'
-})(PostNew);
+})(
+    connect(null, { createPost })(PostNew)
+);
